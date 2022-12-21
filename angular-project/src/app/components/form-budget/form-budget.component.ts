@@ -39,22 +39,12 @@ export class FormBudgetComponent implements OnInit {
 
   updateBudget(budgetAmount: any) {  
     if (budgetAmount > 0){
-      this.budgetService.getBudget().then((response: any) => {
-        if(response[0] != null && response[0].budget != undefined){
-          response[0].budget = budgetAmount;
-          this.budgetService.updateBudget(response[0])
-            .then(() => {
-              localStorage.setItem('isBudgetSet', 'true');
-            })
-            .catch((error) => console.error(error));
-        }else {
-          this.budgetService.addBudget(budgetAmount)
-            .then(() => {
-              localStorage.setItem('isBudgetSet', 'true');
-            })
-            .catch((error) => console.error(error));
-        }
-      });      
+      this.budgetService.updateBudget(budgetAmount)
+        .then(() => {
+          localStorage.setItem('isBudgetSet', 'true');
+          localStorage.setItem('budgetAmount', budgetAmount);
+        })
+        .catch((error) => console.error(error));
     }
 
   }

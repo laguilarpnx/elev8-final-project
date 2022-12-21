@@ -26,18 +26,17 @@ export class BudgetService {
 
   getBudget() {
     const docRef = collection(this.firestore, this.databaseRegistroRef);
-    const query = where('id', '==', 1);
     return getDocs(docRef);
   }
 
   addBudget(amount: number) {
-    const docRef = collection(this.firestore, this.databaseRegistroRef);
-    return addDoc(docRef, {"id": 1, "budget": `${amount}`});
+    const docRef = collection(this.firestore, `${this.databaseRegistroRef}/${1}`);
+    return addDoc(docRef, {"budget": `${amount}`});
   }
 
-  updateBudget(budget: any){
+  updateBudget(budgetAmount: any){
     const docRef = doc(this.firestore, `${this.databaseRegistroRef}/${1}`);
-    return setDoc(docRef, {...budget});
+    return setDoc(docRef, {"budget": `${budgetAmount}`});
   }
   
   addRegistry(newRegistry: any) {

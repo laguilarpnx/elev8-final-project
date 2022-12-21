@@ -21,26 +21,17 @@ export class FooterComponent {
   }
 
   ngOnInit(){
-    this.checkIsBudgetSet();
+    this.checkBudgetSet();
   }
 
-  getBudget() {
-    this.budgetService.getBudget()
-      .then((response: any) => {
-        console.log(response)
-        //this.presupuesto = response[0].budget;
-        this.balance = this.presupuesto - this.gastosTotales;        
-      })
-      .catch((error) => console.error(error));
-  }
-
-  checkIsBudgetSet(){
-    interval(1000)
-    .pipe(takeWhile(() => !this.isBudgetSet))
+  checkBudgetSet(){
+    interval(0)
     .subscribe(() => {
       this.isBudgetSet = localStorage.getItem('isBudgetSet') == "true";
-      if(!this.isBudgetSet){
-        this.getBudget();
+      if(this.isBudgetSet){
+        this.presupuesto = Number(localStorage.getItem('budgetAmount'));
+        this.gastosTotales = Number(localStorage.getItem('expensedAmount'));
+        this.balance = this.presupuesto - this.gastosTotales;
       }
     });
   }
