@@ -1,9 +1,10 @@
 .registry-body {
-    align-items: center;
+    display: block;
     text-align: center;
+    align-items: center;
 }
 
-.form-container mat-form-field+mat-form-field+mat-form-field+mat-form-field {
+.form-container mat-form-field+mat-form-field+mat-form-field {
     padding: 28px;
     display: flex;
     flex-direction: row;
@@ -15,4 +16,16 @@ mat-form-field {
 
 mat-label {
     margin: 10;
+}
+
+.submit-button {
+    width: 130px;
+    height: 30px;
+    margin-bottom: 15px;
+}
+
+.form-registro {
+    border-style: solid;
+    width: 538px;
+    display: inline-block;
 }
