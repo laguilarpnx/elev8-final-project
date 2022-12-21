@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
 import {
   Firestore,
   addDoc,
@@ -12,17 +11,19 @@ import {
 @Injectable({
   providedIn: 'root'
 })
+
 export class BudgetService {
 
-  constructor() { }
+  constructor(private firestore: Firestore) { }
+
+  getBudget() {
+
+  }
 
   updateBudget() {
 
   }
 
-  getBudget() {
-
-  }
 
   addRegistry() {
 
