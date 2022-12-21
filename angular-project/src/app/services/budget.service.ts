@@ -11,7 +11,7 @@ import {
   query,
   setDoc,
   where,
-
+  updateDoc
 } from '@angular/fire/firestore';
 
 @Injectable({
@@ -39,9 +39,19 @@ export class BudgetService {
     return setDoc(docRef, {"budget": `${budgetAmount}`});
   }
   
-  addRegistry(newRegistry: any) {
-    const docRef = collection(this.firestore, this.databaseTransaccionesRef);
-    return addDoc(docRef, newRegistry);
+  async addRegistry(newRegistry: any) {
+    const { nombre, monto, categoria } = newRegistry;
+    //const docRef = collection(this.firestore, this.databaseTransaccionesRef);
+    
+    const newRegistryRef = doc(collection(this.firestore, this.databaseTransaccionesRef));
+
+    await setDoc(newRegistryRef, {nombre, monto, categoria, id: 0});
+
+    await updateDoc(newRegistryRef, {
+      id: newRegistryRef.id
+    });
+
+    //return addDoc(docRef, newRegistry);
   }
 
   getAllRegistries() {
@@ -54,8 +64,8 @@ export class BudgetService {
     return setDoc(docRef, {...newRegistry})
   }
 
-  deleteRegistry(registryID: any) {
-    const docRef:any = collection(this.firestore, `${this.databaseTransaccionesRef}/${registryID}`);
+  deleteRegistry(element: any) {
+    const docRef:any = doc(this.firestore, this.databaseTransaccionesRef, element.id);
     return deleteDoc(docRef);
   }
 

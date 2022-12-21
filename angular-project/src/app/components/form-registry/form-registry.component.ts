@@ -34,10 +34,8 @@ export class FormRegistryComponent {
 
   agregarRegistro() {
     const formValues = this.addForm.value;
-    this.budgetService.addRegistry(formValues);
-
-    console.log(formValues);
-    this.expensedAmount += formValues.monto;
+    this.budgetService.addRegistry(formValues)
+    //.catch((error) => console.error(error));
   }
 
   editRegistry() {
@@ -45,7 +43,6 @@ export class FormRegistryComponent {
   }
 
   deleteRegistry(element:any){
-    console.log(element)
     this.budgetService.deleteRegistry(element);
     this.getRegistros();
   }
