@@ -31,7 +31,7 @@ export class BudgetService {
 
   addBudget(amount: number) {
     const docRef = collection(this.firestore, this.databaseRegistroRef);
-    return addDoc(docRef, {"budget": `${amount}`});
+    return addDoc(docRef, {"id": 1, "budget": `${amount}`});
   }
 
   updateBudget(budget: any){

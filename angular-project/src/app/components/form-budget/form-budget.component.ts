@@ -39,7 +39,7 @@ export class FormBudgetComponent implements OnInit {
       //TODO quitar cliclo infinito de solicitudes
       this.budgetService.getBudget().subscribe((response: any) => {
         console.log("entra")
-        if(response[0].budget != null){
+        if(response[0] != null && response[0].budget != undefined){
           response[0].budget = budgetAmount;
           this.budgetService.updateBudget(response[0])
             .then((response) => {
