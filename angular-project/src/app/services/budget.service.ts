@@ -11,6 +11,7 @@ import {
   query,
   setDoc,
   where,
+  updateDoc,
 
 } from '@angular/fire/firestore';
 
@@ -40,8 +41,13 @@ export class BudgetService {
   }
   
   addRegistry(newRegistry: any) {
+    const { categoria, monto, nombre } = newRegistry;
     const docRef = collection(this.firestore, this.databaseTransaccionesRef);
-    return addDoc(docRef, newRegistry);
+    const newTransaccionRef =  doc(collection(this.firestore, "transacciones"));
+    setDoc(newTransaccionRef, {categoria, monto, nombre, id: 0,});
+
+    setDoc(docRef, );    
+    updateDoc(docRef, { "id": docRef.id, });
   }
 
   getAllRegistries() {

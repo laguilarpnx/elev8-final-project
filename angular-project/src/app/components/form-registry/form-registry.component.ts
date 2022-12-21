@@ -35,8 +35,6 @@ export class FormRegistryComponent {
   agregarRegistro() {
     const formValues = this.addForm.value;
     this.budgetService.addRegistry(formValues);
-
-    console.log(formValues);
     this.expensedAmount += formValues.monto;
   }
 
