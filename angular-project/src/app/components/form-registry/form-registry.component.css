@@ -1,0 +1,18 @@
+.registry-body {
+    align-items: center;
+    text-align: center;
+}
+
+.form-container mat-form-field+mat-form-field+mat-form-field+mat-form-field {
+    padding: 28px;
+    display: flex;
+    flex-direction: row;
+}
+
+mat-form-field {
+    margin: 20px;
+}
+
+mat-label {
+    margin: 10;
+}

@@ -1,1 +1,31 @@
-<p>form-registry works!</p>
+<div class="registry-body">
+    <form id="addContactForm" (ngSubmit)="agregarRegistro(); nuevoRegistro.resetForm();" #nuevoRegistro="ngForm">
+        <mat-form-field floatLabel="always" appearance="fill">
+            <mat-label>Ingrese el nombre</mat-label>
+            <input matInput ngModel #nombre_registro="ngModel" name="nombre_registro" id="nombre_registro"
+                placeholder="Nombre" appearance="fill" required />
+            <mat-error *ngIf="!nombre_registro.valid && nombre_registro.touched">
+                El nombre del registro es requerido
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field floatLabel="always" appearance="fill">
+            <mat-label>Ingrese la Categoría</mat-label>
+            <input matInput ngModel #categoria_registro="ngModel" name="categoria_registro" id="categoria_registro"
+                placeholder="Categoría" appearance="fill" required />
+            <mat-error *ngIf="!categoria_registro.valid && categoria_registro.touched">
+                La categoría del registro es requerido
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field floatLabel="always" appearance="fill">
+            <mat-label>Ingrese el Monto</mat-label>
+            <input matInput ngModel #monto_registro="ngModel" type="number" min="0" name="monto_registro"
+                id="monto_registro" appearance="fill" placeholder="Monto" required />
+            <mat-error *ngIf="!monto_registro.valid && monto_registro.touched">
+                El monto del registro es requerido y no puede ser negativo
+            </mat-error>
+        </mat-form-field>
+        <button matInput mat-flat-button [disabled]="!nuevoRegistro.form.valid" color="accent" type="submit">
+            Add
+        </button>
+    </form>
+</div>
