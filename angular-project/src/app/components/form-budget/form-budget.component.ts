@@ -9,6 +9,8 @@ import {AbstractControl, FormControl, ValidationErrors, Validators} from '@angul
 export class FormBudgetComponent {
   budgetForm = new FormControl('', [Validators.required, Validators.pattern('^[1-9]\\d*$')]);
 
+  ngOnInit(): void {
+  }
 
   numberValidator(): Validators {
     let regex = /^\d*[1-9]\d*$/;
@@ -16,5 +18,9 @@ export class FormBudgetComponent {
       const num = regex.test(control.value);
       return num ? {numVal: {value: control.value}} : null;
     };
+  }
+
+  saveBudget(){
+    localStorage.setItem('isBudgetSet', 'true');
   }
 }

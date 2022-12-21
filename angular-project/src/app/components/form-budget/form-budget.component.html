@@ -1,6 +1,7 @@
 <div class="container">
   <form class="example-form">
     <mat-form-field class="example-full-width">
+      <h3>Definir presupuesto</h3>
       <input type="number" matInput [formControl]="budgetForm" placeholder="Ingrese un presupuesto">
       <mat-error *ngIf="budgetForm.hasError('required')">
         Debe ingresar un <strong>numero positivo</strong>
@@ -11,6 +12,8 @@
     </mat-form-field>
     <br>
     <br>
-    <button mat-raised-button>Guardar</button>
+    <button mat-raised-button onClick="saveBudget" type="submit" class="submit-button">
+            Guardar
+    </button>
   </form>
 </div>
