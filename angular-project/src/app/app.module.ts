@@ -9,6 +9,9 @@ import { FormRegistryComponent } from './components/form-registry/form-registry.
 import { FormRegistryEditComponent } from './components/form-registry-edit/form-registry-edit.component';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideDatabase,getDatabase } from '@angular/fire/database';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
   ],
   imports: [
     BrowserModule,
-    MatToolbarModule
+    MatToolbarModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideDatabase(() => getDatabase())
   ],
   providers: [],
   bootstrap: [AppComponent]
