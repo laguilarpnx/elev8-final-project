@@ -19,37 +19,44 @@ import {
 })
 
 export class BudgetService {
-  databaseRef = 'registros';
+  databaseRegistroRef = 'registros';
+  databaseTransaccionesRef = 'transacciones';
 
   constructor(private firestore: Firestore) { }
 
   getBudget() {
-    const docRef = collection(this.firestore, this.databaseRef);
+    const docRef = collection(this.firestore, this.databaseRegistroRef);
     return collectionData(docRef);
   }
 
-  updateBudget(amount: number) {
-    const docRef = collection(this.firestore, this.databaseRef);
-    return addDoc(docRef, {budget: amount});
+  addBudget(amount: number) {
+    const docRef = collection(this.firestore, this.databaseRegistroRef);
+    return addDoc(docRef, {"budget": `${amount}`});
   }
 
+  updateBudget(budget: any){
+    const docRef = doc(this.firestore, `${this.databaseRegistroRef}/${1}`);
+    return setDoc(docRef, {...budget});
+  }
+  
   addRegistry(newRegistry: any) {
-    const docRef = collection(this.firestore, this.databaseRef);
+    const docRef = collection(this.firestore, this.databaseTransaccionesRef);
     return addDoc(docRef, newRegistry);
   }
 
- /* getAllRegistries() {
-  }*/
+  getAllRegistries() {
+    const docRef = collection(this.firestore, this.databaseTransaccionesRef);
+    return collectionData(docRef);
+  }
 
   editRegistry(newRegistry: any) {
-    const docRef = doc(this.firestore, `${this.databaseRef}/${newRegistry.id}`);
+    const docRef = doc(this.firestore, `${this.databaseTransaccionesRef}/${newRegistry.id}`);
     return setDoc(docRef, {...newRegistry})
   }
 
-  deleteRegistry(registry: any) {
-    const docRef:any = collection(this.firestore, `${this.databaseRef}/${registry.id}`);
+  deleteRegistry(registryID: any) {
+    const docRef:any = collection(this.firestore, `${this.databaseTransaccionesRef}/${registryID}`);
     return deleteDoc(docRef);
   }
-
 
 }

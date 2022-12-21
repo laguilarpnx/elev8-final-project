@@ -2,9 +2,15 @@
 <div class="container">
   <app-header></app-header>
   <div class="body">
-    <app-form-budget></app-form-budget>
-    <app-form-registry></app-form-registry>
-    <app-form-registry-edit></app-form-registry-edit>
+    <div *ngIf="!isBudgetSet">
+      <app-form-budget></app-form-budget>
+    </div>
+    <div *ngIf="isBudgetSet">
+      <app-form-registry></app-form-registry>
+    </div>
+    <div *ngIf="isEditRegistryEnabled">
+      <app-form-registry-edit></app-form-registry-edit>
+    </div>
   </div>
   <div class="footer">
       <app-footer></app-footer>

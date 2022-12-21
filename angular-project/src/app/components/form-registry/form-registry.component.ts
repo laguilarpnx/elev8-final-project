@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { BudgetService } from 'src/app/services/budget.service';
 
 @Component({
   selector: 'app-form-registry',
@@ -9,32 +10,35 @@ import { NgForm } from '@angular/forms';
 export class FormRegistryComponent {
   @ViewChild('nuevoRegistro') addForm!: NgForm;
   displayedColumns: string[] = ['registro', 'acciones'];
-  dataSource = [
-    {
-      nombre: "Registro1",
-      categoria: "1",
-      monto: 150
-    },
-    {
-      nombre : "Registro2",
-      categoria: "2",
-      monto: 100
-    },
-    {
-      nombre: "Regsitro3",
-      categoria: "3",
-      monto: 50
-    }
-  ];
+  registros!: any[];
 
-  constructor() { }
+  constructor(private budgetService: BudgetService ) { }
 
   ngOnInit(): void {
+   this.getRegistros();
   }
 
-  agregarRegistro() {
-    console.log(this.addForm.value);
+  getRegistros(){
+    this.budgetService.getAllRegistries().subscribe((allRegistros) => {
+      this.registros = allRegistros;
+      console.log(allRegistros);
+    });
+}
 
+  agregarRegistro() {
+    const formValues = this.addForm.value;
+    this.budgetService.addRegistry(formValues)
+    .catch((error) => console.error(error));
+  }
+
+  editRegistry() {
+    localStorage.setItem('isEditRegistryEnabled', 'true');
+  }
+
+  deleteRegistry(registryID:any){
+    console.log(registryID);
+    this.budgetService.deleteRegistry(registryID);
+    this.getRegistros();
   }
 
 }
