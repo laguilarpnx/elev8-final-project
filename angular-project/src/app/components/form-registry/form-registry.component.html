@@ -1,25 +1,22 @@
 <div class="registry-body">
     <form id="addContactForm" (ngSubmit)="agregarRegistro(); nuevoRegistro.resetForm();" #nuevoRegistro="ngForm">
-        <mat-form-field floatLabel="always" appearance="fill">
-            <mat-label>Ingrese el nombre</mat-label>
+        <mat-form-field floatLabel="always" appearance="fill">        
             <input matInput ngModel #nombre_registro="ngModel" name="nombre_registro" id="nombre_registro"
-                placeholder="Nombre" appearance="fill" required />
+                placeholder="Ingrese el nombre" appearance="fill" required />
             <mat-error *ngIf="!nombre_registro.valid && nombre_registro.touched">
                 El nombre del registro es requerido
             </mat-error>
         </mat-form-field>
-        <mat-form-field floatLabel="always" appearance="fill">
-            <mat-label>Ingrese la Categoría</mat-label>
+        <mat-form-field floatLabel="always" appearance="fill">            
             <input matInput ngModel #categoria_registro="ngModel" name="categoria_registro" id="categoria_registro"
-                placeholder="Categoría" appearance="fill" required />
+                placeholder="Ingrese la Categoría" appearance="fill" required />
             <mat-error *ngIf="!categoria_registro.valid && categoria_registro.touched">
                 La categoría del registro es requerido
             </mat-error>
         </mat-form-field>
-        <mat-form-field floatLabel="always" appearance="fill">
-            <mat-label>Ingrese el Monto</mat-label>
+        <mat-form-field floatLabel="always" appearance="fill">            
             <input matInput ngModel #monto_registro="ngModel" type="number" min="0" name="monto_registro"
-                id="monto_registro" appearance="fill" placeholder="Monto" required />
+                id="monto_registro" appearance="fill" placeholder="Ingrese el Monto" required />
             <mat-error *ngIf="!monto_registro.valid && monto_registro.touched">
                 El monto del registro es requerido y no puede ser negativo
             </mat-error>
