@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormControl, ValidationErrors, Validators} from '@angular/forms';
+import { BudgetService } from 'src/app/services/budget.service';
 
 @Component({
   selector: 'app-form-budget',
@@ -23,4 +24,31 @@ export class FormBudgetComponent {
   saveBudget(){
     localStorage.setItem('isBudgetSet', 'true');
   }
+
+  constructor(private budgetService: BudgetService) {}
+
+  get_budget() {
+    this.budgetService.getBudget().subscribe({
+      next: (response) => {
+        console.log(response)      
+      },
+      error: (error) => {
+        console.error(error)      
+      }
+    })
+  }
+
+  // update_budget() {
+  //   this.budgetService
+  //     .updateBudget({
+  //       user: this.usuario.uid,
+  //       ...this.formulario.value,
+  //     })
+  //     .then((new_perfil) => {
+  //       console.log(`Submitted profile: ${JSON.stringify(new_perfil)}`);
+  //       this.get_perfil();
+  //     })
+  //     .catch((error) => console.error(error));
+  // }
+  
 }
