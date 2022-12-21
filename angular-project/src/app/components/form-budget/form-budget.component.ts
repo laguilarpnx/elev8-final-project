@@ -7,7 +7,10 @@ import {
   NgForm
 } from '@angular/forms';
 import { BudgetService } from 'src/app/services/budget.service';
-
+import {firstValueFrom} from 'rxjs';
+import {
+  collectionData,
+} from '@angular/fire/firestore';
 @Component({
   selector: 'app-form-budget',
   templateUrl: './form-budget.component.html',
@@ -36,13 +39,11 @@ export class FormBudgetComponent implements OnInit {
 
   updateBudget(budgetAmount: any) {  
     if (budgetAmount > 0){
-      //TODO quitar cliclo infinito de solicitudes
-      this.budgetService.getBudget().subscribe((response: any) => {
-        console.log("entra")
+      this.budgetService.getBudget().then((response: any) => {
         if(response[0] != null && response[0].budget != undefined){
           response[0].budget = budgetAmount;
           this.budgetService.updateBudget(response[0])
-            .then((response) => {
+            .then(() => {
               localStorage.setItem('isBudgetSet', 'true');
             })
             .catch((error) => console.error(error));
@@ -53,7 +54,7 @@ export class FormBudgetComponent implements OnInit {
             })
             .catch((error) => console.error(error));
         }
-      });
+      });      
     }
 
   }

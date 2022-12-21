@@ -26,7 +26,8 @@ export class BudgetService {
 
   getBudget() {
     const docRef = collection(this.firestore, this.databaseRegistroRef);
-    return collectionData(docRef);
+    const query = where('id', '==', 1);
+    return getDocs(docRef);
   }
 
   addBudget(amount: number) {

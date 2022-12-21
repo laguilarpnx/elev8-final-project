@@ -1,13 +1,13 @@
 export const environment = {
   firebase: {
-    projectId: 'budgetngapp',
-    appId: '1:713637563778:web:5fb553b1aa1aaf6d3b939b',
-    databaseURL: 'https://budgetngapp-default-rtdb.firebaseio.com',
-    storageBucket: 'budgetngapp.appspot.com',
-    apiKey: 'AIzaSyAs4rLx5G6Tr244pcFkMDWmTHPX5TpikHk',
-    authDomain: 'budgetngapp.firebaseapp.com',
-    messagingSenderId: '713637563778',
-    measurementId: 'G-V2PXGT3EC1',
+    apiKey: "AIzaSyB-bqJCRTzYlLr2b4IeTFn-w0XV8Fk_ACE",
+    authDomain: "elev8-8c2ec.firebaseapp.com",
+    databaseURL: "https://elev8-8c2ec-default-rtdb.firebaseio.com",
+    projectId: "elev8-8c2ec",
+    storageBucket: "elev8-8c2ec.appspot.com",
+    messagingSenderId: "275228148201",
+    appId: "1:275228148201:web:e339a1725bacbe19854b78",
+    measurementId: "G-WXC263GP83"
   },
     production: false,
   };

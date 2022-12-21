@@ -6,5 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./form-registry-edit.component.css']
 })
 export class FormRegistryEditComponent {
-  
 }

@@ -25,15 +25,13 @@ export class FooterComponent {
   }
 
   getBudget() {
-    this.budgetService.getBudget().subscribe({
-      next: (response: any) => {
-        this.presupuesto = response[0].budget;
-        this.balance = this.presupuesto - this.gastosTotales;
-      },
-      error: (error: any) => {
-        console.error(error);
-      },
-    });
+    this.budgetService.getBudget()
+      .then((response: any) => {
+        console.log(response)
+        //this.presupuesto = response[0].budget;
+        this.balance = this.presupuesto - this.gastosTotales;        
+      })
+      .catch((error) => console.error(error));
   }
 
   checkIsBudgetSet(){
@@ -41,7 +39,7 @@ export class FooterComponent {
     .pipe(takeWhile(() => !this.isBudgetSet))
     .subscribe(() => {
       this.isBudgetSet = localStorage.getItem('isBudgetSet') == "true";
-      if(this.isBudgetSet){
+      if(!this.isBudgetSet){
         this.getBudget();
       }
     });

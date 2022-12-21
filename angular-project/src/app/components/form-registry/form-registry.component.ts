@@ -21,7 +21,7 @@ export class FormRegistryComponent {
   getRegistros(){
     this.budgetService.getAllRegistries().subscribe((allRegistros) => {
       this.registros = allRegistros;
-      console.log(allRegistros);
+      console.log(allRegistros)
     });
 }
 
@@ -36,7 +36,6 @@ export class FormRegistryComponent {
   }
 
   deleteRegistry(registryID:any){
-    console.log(registryID);
     this.budgetService.deleteRegistry(registryID);
     this.getRegistros();
   }
