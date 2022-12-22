@@ -2,10 +2,10 @@
 <div class="container">
   <app-header></app-header>
   <div class="body">
-    <div *ngIf="true">
+    <div *ngIf="!isBudgetSet">
       <app-form-budget></app-form-budget>
     </div>
-    <div *ngIf="true">
+    <div *ngIf="!isEditRegistryEnabled">
       <app-form-registry></app-form-registry>
     </div>
   </div>

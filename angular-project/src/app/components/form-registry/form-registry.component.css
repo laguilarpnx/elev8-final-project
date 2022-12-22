@@ -40,3 +40,9 @@ table {
     border-color: black;
     border-style: solid;
 }
+
+.container-dialog {
+    position: sticky;
+    z-index: 20;
+    top: 50px;
+}

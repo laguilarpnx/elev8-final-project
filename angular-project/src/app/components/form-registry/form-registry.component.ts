@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BudgetService } from 'src/app/services/budget.service';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -13,9 +13,10 @@ export class FormRegistryComponent {
   displayedColumns: string[] = ['registro', 'acciones'];
   registros!: any[];
   expensedAmount!: number;
-
+  
   constructor(
-    private budgetService: BudgetService
+    private budgetService: BudgetService,
+    private dialog: MatDialog
   ) {
     this.expensedAmount = 0;
    }
@@ -25,7 +26,7 @@ export class FormRegistryComponent {
   }
 
   getRegistros(){
-    this.budgetService.getAllRegistries().subscribe((allRegistros) => {
+    this.budgetService.getAllRegistries().subscribe((allRegistros: any) => {
       this.registros = allRegistros;
       console.log(allRegistros)
       this.getGastosTotales();
@@ -54,18 +55,18 @@ export class FormRegistryComponent {
     });
     localStorage.setItem('expensedAmount', `${this.expensedAmount}`);
   }
-/*
+
   openDialog(registro: any): void {
     const dialogRef = this.dialog.open(FormRegistryEditDialog, {
       data: registro,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result:any) => {
       console.log('The dialog was closed');
     });
-  }*/
+  }
 }
-/*
+
 @Component({
   selector: 'form-registry-edit-dialog',
   templateUrl: 'form-registry-edit-dialog.html',
@@ -79,4 +80,4 @@ export class FormRegistryEditDialog {
   onNoClick(): void {
     this.dialogRef.close();
   }
-}*/
+}
