@@ -1,0 +1,12 @@
+.container {
+    border-style: solid;
+    border-color: black;
+    padding: 28px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+mat-form-field {
+    padding-bottom: 40px;
+}

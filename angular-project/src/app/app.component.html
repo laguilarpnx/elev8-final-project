@@ -5,8 +5,11 @@
     <div *ngIf="!isBudgetSet">
       <app-form-budget></app-form-budget>
     </div>
-    <div *ngIf="!isEditRegistryEnabled">
-      <app-form-registry></app-form-registry>
+    <div *ngIf="isBudgetSet && !isEditRegistryEnabled">
+      <app-form-registry (registroID)="setID($event)" (registroNombre)="setNombre($event)" (registroCategoria)="setCategoria($event)" (registroMonto)="setMonto($event)"></app-form-registry>
+    </div>
+    <div *ngIf="isEditRegistryEnabled">
+      <app-form-registry-edit [registroID]="registroID" [registroNombre]="registroNombre" [registroCategoria]="registroCategoria" [registroMonto]="registroMonto"></app-form-registry-edit>
     </div>
   </div>
   <div class="footer">

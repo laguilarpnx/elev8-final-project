@@ -61,7 +61,7 @@ export class BudgetService {
 
   editRegistry(newRegistry: any) {
     const docRef = doc(this.firestore, this.databaseTransaccionesRef, newRegistry.id);
-    return setDoc(docRef, {...newRegistry})
+    updateDoc(docRef, {...newRegistry})
   }
 
   deleteRegistry(element: any) {

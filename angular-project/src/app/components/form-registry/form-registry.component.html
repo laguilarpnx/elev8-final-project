@@ -1,6 +1,6 @@
 <div class="registry-body">
 
-    <form id="addContactForm" class="form-registro" (ngSubmit)="agregarRegistro(); nuevoRegistro.resetForm();"
+    <form id="addContactForm" class="form-registro" (ngSubmit)="nuevoRegistro.resetForm();"
         #nuevoRegistro="ngForm">
         <h3>Nuevo registro</h3>
         <mat-form-field floatLabel="always" appearance="fill">
@@ -26,7 +26,7 @@
         </mat-form-field>
         <br />
         <br>
-        <button mat-raised-button [disabled]="!nuevoRegistro.form.valid" (click)="editRegistry()" color="accent"
+        <button mat-raised-button [disabled]="!nuevoRegistro.form.valid" (click)="agregarRegistro()" color="accent"
             type="submit" class="submit-button">
             Agregar
         </button>
@@ -52,13 +52,14 @@
             <ng-container matColumnDef="acciones">
                 <th mat-header-cell *matHeaderCellDef> Acciones </th>
                 <td mat-cell *matCellDef="let element">
-                    <button mat-icon-button color="primary" (click)="openDialog(element)">
+                    <button mat-icon-button color="primary" (click)="editRegistry(element)">
                         <mat-icon>edit</mat-icon>
                     </button>
 
                     &nbsp;<button mat-icon-button color="primary" (click)="deleteRegistry(element)">
                         <mat-icon>delete</mat-icon>
-                    </button></td>
+                    </button>
+                </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

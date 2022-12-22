@@ -10,11 +10,32 @@ export class AppComponent {
   title = 'angular-project';
   isBudgetSet = false;
   isEditRegistryEnabled = false;
+  registroID: any;
+  registroNombre: any;
+  registroCategoria: any;
+  registroMonto: any;
+  
   
   ngOnInit(){
     localStorage.clear();
     this.checkIsBudgetSet();
     this.checkIsEditRegistryEnabled();
+  }
+
+  setID(value: any) {
+    this.registroID = value;
+  }
+
+  setNombre(value: any) {
+    this.registroNombre = value;
+  }
+
+  setMonto(value: any) {
+    this.registroMonto = value;
+  }
+  
+  setCategoria(value: any) {
+    this.registroCategoria = value;
   }
 
   checkIsBudgetSet(){
@@ -26,7 +47,7 @@ export class AppComponent {
   }
 
   checkIsEditRegistryEnabled(){
-    interval(2000)
+    interval(1000)
     .subscribe(() => {
       this.isEditRegistryEnabled = localStorage.getItem('isEditRegistryEnabled') == "true";
     });

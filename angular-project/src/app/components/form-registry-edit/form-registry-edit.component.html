@@ -1,0 +1,63 @@
+<div class="container">
+    <form id="addContactForm" class="form-registro" (ngSubmit)="save(); editRegistro.resetForm();"
+        #editRegistro="ngForm">
+        <h3>Editar registro</h3>
+        <mat-form-field floatLabel="always" appearance="fill">
+            <input
+            matInput
+            [ngModel]="registroNombre"
+            #nombre="ngModel"
+            name="nombre"
+            id="nombre"
+            placeholder="Ingrese el nombre"
+            appearance="fill"
+            required
+            
+            />
+            <mat-error *ngIf="!nombre.valid && nombre.touched">
+            El nombre del registro es requerido
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field floatLabel="always" appearance="fill">
+            <input
+            matInput
+            [ngModel]="registroCategoria"
+            #categoria="ngModel"
+            name="categoria"
+            id="categoria"
+            placeholder="Ingrese la Categoría"
+            appearance="fill"
+            required
+            />
+            <mat-error *ngIf="!categoria.valid && categoria.touched">
+            La categoría del registro es requerido
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field floatLabel="always" appearance="fill">
+            <input
+            matInput
+            [ngModel]="registroMonto"
+            #monto="ngModel"
+            type="number"
+            min="0"
+            name="monto"
+            id="monto"
+            appearance="fill"
+            placeholder="Ingrese el Monto"
+            required
+            />
+            <mat-error *ngIf="!monto.valid && monto.touched">
+            El monto del registro es requerido y no puede ser negativo
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="accent" type="cancel" (click)="cancel()" class="submit-button">
+            Cancelar
+        </button>        
+        <button mat-raised-button color="accent" type="submit" (click)="save()" class="submit-button">
+            Guardar
+        </button>
+    </form>
+</div>

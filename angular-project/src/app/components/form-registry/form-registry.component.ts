@@ -1,8 +1,7 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { interval } from 'rxjs';
 import { BudgetService } from 'src/app/services/budget.service';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-
 @Component({
   selector: 'app-form-registry',
   templateUrl: './form-registry.component.html',
@@ -12,11 +11,18 @@ export class FormRegistryComponent {
   @ViewChild('nuevoRegistro') addForm!: NgForm;
   displayedColumns: string[] = ['registro', 'acciones'];
   registros!: any[];
-  expensedAmount!: number;
+  expensedAmount: number;
   
+  @Output() registroID = new EventEmitter<any>();
+  @Output() registroNombre = new EventEmitter<any>();
+  @Output() registroCategoria = new EventEmitter<any>();
+  @Output() registroMonto = new EventEmitter<any>();
+
+  isBudgetSet: boolean | undefined;
+  isEditRegistryEnabled: boolean | undefined;
+
   constructor(
     private budgetService: BudgetService,
-    private dialog: MatDialog
   ) {
     this.expensedAmount = 0;
    }
@@ -28,7 +34,6 @@ export class FormRegistryComponent {
   getRegistros(){
     this.budgetService.getAllRegistries().subscribe((allRegistros: any) => {
       this.registros = allRegistros;
-      console.log(allRegistros)
       this.getGastosTotales();
     });
 }
@@ -36,15 +41,23 @@ export class FormRegistryComponent {
   agregarRegistro() {
     const formValues = this.addForm.value;
     this.budgetService.addRegistry(formValues);
-    //.catch((error) => console.error(error));
+    this.expensedAmount = Number(localStorage.getItem('expensedAmount'));
     this.expensedAmount += formValues.monto;
+    localStorage.setItem('expensedAmount', `${this.expensedAmount}`);
   }
 
-  editRegistry() {
+  editRegistry(element:any) {
+    this.registroID.emit(element.id);
+    this.registroNombre.emit(element.nombre);
+    this.registroCategoria.emit(element.categoria);
+    this.registroMonto.emit(element.monto);
+
     localStorage.setItem('isEditRegistryEnabled', 'true');
   }
 
   deleteRegistry(element:any){
+    this.expensedAmount = Number(localStorage.getItem('expensedAmount')) - element.monto;
+    localStorage.setItem('expensedAmount', `${this.expensedAmount}`)
     this.budgetService.deleteRegistry(element);
     this.getRegistros();
   }
@@ -56,28 +69,15 @@ export class FormRegistryComponent {
     localStorage.setItem('expensedAmount', `${this.expensedAmount}`);
   }
 
-  openDialog(registro: any): void {
-    const dialogRef = this.dialog.open(FormRegistryEditDialog, {
-      data: registro,
-    });
-
-    dialogRef.afterClosed().subscribe((result:any) => {
-      console.log('The dialog was closed');
+  updateRegister(){
+    interval(1000)
+    .subscribe(() => {
+      this.isBudgetSet = localStorage.getItem('isBudgetSet') == "true";
+      this.isEditRegistryEnabled = localStorage.getItem('isEditRegistryEnabled') == "false";
+      if(this.isBudgetSet && this.isEditRegistryEnabled){
+        this.getRegistros();
+      }
     });
   }
 }
 
-@Component({
-  selector: 'form-registry-edit-dialog',
-  templateUrl: 'form-registry-edit-dialog.html',
-})
-export class FormRegistryEditDialog {
-  constructor(
-    public dialogRef: MatDialogRef<FormRegistryEditDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: FormRegistryComponent,
-  ) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-}

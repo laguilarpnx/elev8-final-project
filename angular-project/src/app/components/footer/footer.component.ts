@@ -25,7 +25,7 @@ export class FooterComponent {
   }
 
   checkBudgetSet(){
-    interval(500)
+    interval(1000)
     .subscribe(() => {
       this.isBudgetSet = localStorage.getItem('isBudgetSet') == "true";
       if(this.isBudgetSet){

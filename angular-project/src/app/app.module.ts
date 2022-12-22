@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FormBudgetComponent } from './components/form-budget/form-budget.component';
-import { FormRegistryComponent, FormRegistryEditDialog } from './components/form-registry/form-registry.component';
+import { FormRegistryComponent } from './components/form-registry/form-registry.component';
 import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -21,6 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { FormRegistryEditComponent } from './components/form-registry-edit/form-registry-edit.component';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     FooterComponent,
     FormBudgetComponent,
     FormRegistryComponent,
-    FormRegistryEditDialog
+    FormRegistryEditComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +50,8 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     provideFirestore(() => getFirestore())
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+  ]
 })
 export class AppModule { }
