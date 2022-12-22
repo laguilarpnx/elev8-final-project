@@ -1,1 +1,68 @@
-<p>form-registry works!</p>
+<div class="registry-body">
+
+    <form id="addContactForm" class="form-registro" (ngSubmit)="agregarRegistro(); nuevoRegistro.resetForm();"
+        #nuevoRegistro="ngForm">
+        <h3>Nuevo registro</h3>
+        <mat-form-field floatLabel="always" appearance="fill">
+            <input matInput ngModel #nombre="ngModel" name="nombre" id="nombre" placeholder="Ingrese el nombre"
+                appearance="fill" required />
+            <mat-error *ngIf="!nombre.valid && nombre.touched">
+                El nombre del registro es requerido
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field floatLabel="always" appearance="fill">
+            <input matInput ngModel #categoria="ngModel" name="categoria" id="categoria"
+                placeholder="Ingrese la Categoría" appearance="fill" required />
+            <mat-error *ngIf="!categoria.valid && categoria.touched">
+                La categoría del registro es requerido
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field floatLabel="always" appearance="fill">
+            <input matInput ngModel #monto="ngModel" type="number" min="0" name="monto" id="monto" appearance="fill"
+                placeholder="Ingrese el Monto" required />
+            <mat-error *ngIf="!monto.valid && monto.touched">
+                El monto del registro es requerido y no puede ser negativo
+            </mat-error>
+        </mat-form-field>
+        <br />
+        <br>
+        <button mat-raised-button [disabled]="!nuevoRegistro.form.valid" (click)="editRegistry()" color="accent"
+            type="submit" class="submit-button">
+            Agregar
+        </button>
+    </form>
+    <br />
+    <div class="lista-registro">
+        <table mat-table [dataSource]="registros" class="mat-elevation-z8">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+            <!-- Position Column -->
+
+            <!-- Name Column -->
+
+            <ng-container matColumnDef="registro">
+                <th mat-header-cell *matHeaderCellDef> Registro </th>
+                <td mat-cell *matCellDef="let element"> {{element.nombre}}, &nbsp;{{element.categoria}},
+                    &nbsp;{{element.monto}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button color="primary" (click)="openDialog(element)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+
+                    &nbsp;<button mat-icon-button color="primary" (click)="deleteRegistry(element)">
+                        <mat-icon>delete</mat-icon>
+                    </button></td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+.container {
+    border-color: black;
+    border-style: solid;
+    width: 538px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+h3 {
+    margin-bottom: 30px;
+}
+
+.submit-button {
+    width: 130px;
+    height: 30px;
+    margin-bottom: 15px;
+    margin-left: 18%;
+    margin-top: 20px;
+}

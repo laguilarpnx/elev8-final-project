@@ -1,1 +1,19 @@
-<p>form-budget works!</p>
+<div class="container">
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <h3>Definir presupuesto</h3>
+      <input #budgetInput [formControl]="budgetForm" matInput type="number" name="monto_budget" id="monto_budget" min="0" placeholder="Ingrese un presupuesto">
+      <mat-error *ngIf="budgetForm.hasError('required')">
+        Debe ingresar un <strong>numero positivo</strong>
+      </mat-error>
+      <mat-error *ngIf="budgetForm.hasError('pattern')">
+        Debe ingresar un <strong>numero positivo</strong>
+      </mat-error>
+    </mat-form-field>
+    <br>
+    <br>
+    <button mat-raised-button (click)="updateBudget(budgetInput.value)" type="submit" class="submit-button">
+            Guardar
+    </button>
+  </form>
+</div>
